@@ -1,0 +1,28 @@
+vlh.modname=Violet's Live Helper
+
+vlh.key.options=Mod Options
+vlh.key.postscreen=Screenshot & Post
+
+vlh.message.postthread.failed=Failed to submit.
+vlh.message.postthread.notconfig=Since you're not ready to post, the screenshot is copied to clipboard.
+vlh.message.postthread.success=Reply with screenshot submitted.
+
+vlh.options.check=Check
+vlh.options.failed=Retry (Failed to login)
+vlh.options.invalid=Retry (Invalid Thread ID)
+vlh.options.loggedin=(Already logged in)
+vlh.options.login=Login
+vlh.options.loginfirst=(Please login first)
+vlh.options.password=Password
+vlh.options.threadid=Thread ID
+vlh.options.title=Violet's Live Helper Options
+vlh.options.username=Username
+vlh.options.valid=(Thread ID checked)
+
+vlh.postthread.configfirst=(Please configure first)
+vlh.postthread.text=Text Content
+vlh.postthread.title=Submit Reply
+vlh.postthread.post=Submit
+vlh.postthread.wmrk=Add Watermark
+vlh.postthread.wmrked=Watermark Added
+
