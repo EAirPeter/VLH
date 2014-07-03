@@ -20,10 +20,10 @@ public class VLHGuiPasswordField extends GuiTextField {
 	@Override
 	public void drawTextBox () {
 		String tmptext = getText();
-		String newtext = new String();
+		StringBuilder newtext = new StringBuilder();
 		for (int i = 0; i < tmptext.length(); ++i)
-			newtext += '*';
-		setText(newtext);
+			newtext.append('*');
+		setText(newtext.toString());
 		super.drawTextBox();
 		setText(tmptext);
 	}

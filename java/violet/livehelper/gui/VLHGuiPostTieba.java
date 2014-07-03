@@ -6,16 +6,14 @@ import org.lwjgl.input.Keyboard;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import violet.livehelper.VLHImageHelper;
-import violet.livehelper.VioletLiveHelper;
 import violet.livehelper.net.VLHTiebaPoster;
+import violet.livehelper.net.VLHTiebaTask;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.resources.I18n;
 
 @SideOnly(Side.CLIENT)
-public class VLHGuiPostTieba extends GuiScreen {
+public class VLHGuiPostTieba extends VLHGuiScreen {
 
 	VLHTiebaPoster poster;
 	
@@ -103,32 +101,11 @@ public class VLHGuiPostTieba extends GuiScreen {
 				}
 				break;
 			case butPost:
-				if (wmrked)
-					VLHImageHelper.addWaterMark(image, "By @" + poster.getUsername());
-				poster.setImage(image);
-				poster.setText(text);
-				if (poster.postThread()) {
-					VioletLiveHelper.printMessage("vlh.message.postthread.success");
-					mc.displayGuiScreen(null);
-					mc.setIngameFocus();
-				}
-				else
-					((GuiButton) buttonList.get(butPost)).displayString = I18n.format("vlh.message.postthread.failed", new Object[0]);
+				new Thread(new VLHTiebaTask(VLHTiebaTask.TT_POSTTHREAD, poster, text, image, wmrked)).start();
+				mc.displayGuiScreen(null);
+				mc.setIngameFocus();
 				break;
 			}
-		}
-	}
-	
-	@Override
-	public void handleKeyboardInput() {
-		int vl = Keyboard.getEventKey();
-		char ch = Keyboard.getEventCharacter();
-		if (Keyboard.getEventKeyState() || (vl == 0 && Character.isDefined(ch))) {
-			if (vl == Keyboard.KEY_F11) {
-				mc.toggleFullscreen();
-				return;
-			}
-			keyTyped(ch, vl);
 		}
 	}
 }

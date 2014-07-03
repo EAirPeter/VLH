@@ -9,7 +9,6 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.common.config.Configuration;
-import violet.livehelper.net.VLHIPoster;
 import violet.livehelper.net.VLHTiebaPoster;
 import violet.livehelper.proxy.ProxyCommon;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -33,7 +32,7 @@ public class VioletLiveHelper {
 	public static ProxyCommon proxy;
 
 	private static Minecraft mc;
-	public static VLHIPoster poster;
+	public static VLHTiebaPoster poster;
 	public static String chatHeader;
 
 	@EventHandler
@@ -41,22 +40,20 @@ public class VioletLiveHelper {
 		mc = Minecraft.getMinecraft();
 		Configuration config = new Configuration(event.getSuggestedConfigurationFile());
 		config.load();
-		String posterType = config.get("Network", "Type", "Tieba").getString().toLowerCase();
-		if (posterType.equals("tieba"))
-			poster = new VLHTiebaPoster();
 		config.save();
-		chatHeader = EnumChatFormatting.DARK_PURPLE.toString() + "[VLiveHelper] " + EnumChatFormatting.RESET.toString();
 	}
 
 	@EventHandler
 	public void load (FMLInitializationEvent event) {
-		FMLCommonHandler.instance().bus().register(new VLHKeyHandler());
+		FMLCommonHandler.instance().bus().register(new VLHEventHandler());
+		chatHeader = EnumChatFormatting.DARK_PURPLE.toString() + "[VLiveHelper] " + EnumChatFormatting.RESET.toString();
+		poster = new VLHTiebaPoster();
 	}
 	
 	public static BufferedImage saveScreenShot () throws IOException {
 		File dir = new File(mc.mcDataDir, "screenshots");
 		dir.mkdir();
-		return VLHImageHelper.saveScreenShot(dir, mc.displayWidth, mc.displayHeight, mc.getFramebuffer());
+		return VLHImageUtil.saveScreenShot(dir, mc.displayWidth, mc.displayHeight, mc.getFramebuffer());
 	}
 	
 	public static void printMessage (String sMsgUnlocalized) {

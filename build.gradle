@@ -30,6 +30,6 @@ sourceSets {
 }
 
 archivesBaseName = "VLiveHelper"
-version = "v0.00b-1.7.2"
+version = "v0.01a-1.7.2"
 group = "violet.livehelper"
-minecraft.version = "1.7.2-10.12.1.1060"
+minecraft.version = "1.7.2-10.12.2.1121"
